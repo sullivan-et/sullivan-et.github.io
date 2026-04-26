@@ -1,3 +1,37 @@
+/* ===== CSS Variables Guide ===== */
+/*
+  COLOR SYSTEM:
+  --bg: Page background (#1a1a1a)
+  --text: Primary text color (#e0e0e0)
+  --accent: Main accent color (#8a9b6e - muted moss green)
+  --accent-secondary: Secondary accent (#7aa2f7 - azure blue)
+  --border: Border and separator colors (#3a3a3a)
+  --card-bg: Card backgrounds (#252525)
+  --code-bg: Code block backgrounds (#2d2d2d)
+  --text-muted: Muted/secondary text (#a0a0a0)
+
+  TYPOGRAPHY:
+  --font-sans: Primary sans-serif font stack
+  --font-mono: Monospace font stack
+  --font-emoji: Emoji font stack
+  --text-base: Base font size (1rem)
+  --text-sm: Small font size (0.875rem)
+  --text-xs: Extra small font size (0.75rem)
+  --leading-normal: Normal line height (1.7)
+  --leading-tight: Tight line height (1.3)
+
+  LAYOUT:
+  --gap: Standard gap (1.5rem)
+  --gap-sm: Small gap (1rem)
+  --gap-xs: Extra small gap (0.5rem)
+  --radius: Border radius (4px)
+  --max-width: Maximum content width (900px)
+
+  USAGE:
+  Use variables like: color: var(--accent);
+  Add new variables only when necessary for consistency.
+*/
+
 /* ===== Base Reset ===== */
 * {
     margin: 0;
@@ -33,7 +67,9 @@ body {
     --text: #e0e0e0;
     --accent: #8a9b6e;  /* Your muted moss green */
     --accent-secondary: #7aa2f7; /* Your azure blue */
-    --border: #3a3a3a;
+    --accent-dark: #2e3b2a;
+    --info: #BC8ADB;
+    --border: #3e3e3e;
     --card-bg: #252525;
     --code-bg: #2d2d2d;
     
@@ -167,30 +203,193 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
-/* ===== Table System ===== */
-.deps-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: var(--gap) 0;
+.doc-section-gap {
+    margin-bottom: 3rem;
 }
 
-.deps-table th, 
-.deps-table td {
-    padding: var(--gap-xs) var(--gap-sm);
-    text-align: left;
+.doc-section-gap h2 {
+    color: var(--accent);
+    margin-bottom: var(--gap-sm);
+    padding-bottom: var(--gap-xs);
     border-bottom: 1px solid var(--border);
 }
 
-.deps-table th {
-    font-weight: 700;
-    background: rgba(0,0,0,0.1);
+/* ===== Function Documentation ===== */
+.function-doc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: var(--gap) 0;
+    overflow: hidden;
 }
 
+.function-header {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.function-signature {
+    font-family: var(--font-mono);
+    color: var(--text);
+    font-size: var(--text-base);
+    line-height: var(--leading-tight);
+}
+
+.function-signature .keyword { color: rgb(86,194,130); font-weight: bold;}
+.function-signature .type { color: rgb(136,209,138); font-weight: bold;}
+.function-signature .function { color: rgb(248,248,137); font-weight: bold;}
+.function-signature .operator { color: rgb(179,138,79); font-weight: bold; }
+.function-signature .punctuation { color: rgb(179,138,79); font-weight: bold; }
+.function-signature .macro { color: rgb(191,38,38); font-weight: bold;}
+.function-signature .flow { color: rgb(230,70,70); font-weight: bold;}
+.function-signature .constant { color: rgb(196,196,196); font-weight: bold;}
+
+.function-name {
+    color: #e6b422; /* Autumn yellow */
+    font-weight: 600;
+}
+
+.function-type {
+    color: #d4a657; /* Muted autumn yellow */
+}
+
+.function-params {
+    color: var(--text);
+}
+
+.function-description {
+    padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+    line-height: var(--leading-normal);
+}
+
+.function-parameters {
+    margin: 0rem 0rem 1rem 0rem;
+}
+
+.parameter {
+    display: flex;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.parameter:first-child {
+    margin-top: 0.75em;
+}
+
+.parameter:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.parameter-name {
+    font-family: var(--font-mono);
+    color: var(--info);
+    min-width: 18rem;   /* increase if needed */
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+.parameter-name .keyword { color: rgb(86,194,130); font-weight: bold;}
+.parameter-name .type { color: rgb(136,209,138); font-weight: bold;}
+.parameter-name .class { color: rgb(136,209,138); font-weight: bold;}
+.parameter-name .function { color: rgb(248,248,137); font-weight: bold;}
+.parameter-name .operator { color: rgb(179,138,79); font-weight: bold; }
+.parameter-name .punctuation { color: rgb(179,138,79); font-weight: bold; }
+.parameter-name .macro { color: rgb(191,38,38); font-weight: bold;}
+.parameter-name .flow { color: rgb(230,70,70); font-weight: bold;}
+.parameter-name .constant { color: rgb(196,196,196); font-weight: bold;}
+.parameter-name .string { color: rgb(29,189,159); font-weight: bold;}
+.parameter-name .number { color: rgb(249,199,60); font-weight: bold;}
+
+.parameter-desc {
+    flex: 1;
+    color: var(--text-muted);
+}
+
+.function-note {
+    background: rgba(180, 180, 180, 0.1);
+    border-left: 3px solid var(--info);
+    padding: 1rem;
+    margin: 1rem 0rem 0rem 0rem;
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.note-title {
+    font-family: var(--font-mono);
+    color: var(--info);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* ===== Type Documentation ===== */
+
+.type-doc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: var(--gap) 0;
+    overflow: hidden;
+}
+
+.type-header {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.type-signature {
+    font-family: var(--font-mono);
+    color: var(--text);
+    font-size: var(--text-base);
+}
+
+.type-signature .keyword { color: rgb(86,194,130); font-weight: bold;}
+.type-signature .type { color: rgb(136,209,138); font-weight: bold;}
+.type-signature .class { color: rgb(136,209,138); font-weight: bold;}
+.type-signature .function { color: rgb(248,248,137); font-weight: bold;}
+.type-signature .operator { color: rgb(179,138,79); font-weight: bold; }
+.type-signature .punctuation { color: rgb(179,138,79); font-weight: bold; }
+.type-signature .macro { color: rgb(191,38,38); font-weight: bold;}
+.type-signature .flow { color: rgb(230,70,70); font-weight: bold;}
+.type-signature .constant { color: rgb(196,196,196); font-weight: bold;}
+.type-signature .string { color: rgb(29,189,159); font-weight: bold;}
+.type-signature .number { color: rgb(249,199,60); font-weight: bold;}
+
+.type-name {
+    color: var(--border);/* #e6b422; */
+    font-weight: 600;
+}
+
+.type-description {
+    padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+    line-height: var(--leading-normal);
+}
+
+.type-description .function-parameters {
+    margin-bottom: 0;
+}
+        
 /* ===== Utilities ===== */
 .mt-0 { margin-top: 0 !important; }
 .mb-0 { margin-bottom: 0 !important; }
 .text-sm { font-size: var(--text-sm); }
 .text-muted { color: var(--text-muted); }
+h4 { margin-bottom: 0.75rem; }
+.gapbreak {
+    display: block;
+    height: var(--gap);   /* exactly 1.5rem */
+    margin: 0;            /* no collapse risk */
+}
+img {
+    max-width: 100%;   /* Constrains image to its parent container's width */
+    height: auto;      /* Maintains aspect ratio */
+    display: block;    /* Optional: removes extra inline spacing */
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* ===== Links styling ===== */
 a {
@@ -200,7 +399,7 @@ a {
 }
 
 a:hover {
-    opacity: 0.9;
+    opacity: 0.8;
     text-decoration: underline;
 }
 
@@ -209,46 +408,161 @@ a:hover {
 .table-container {
     overflow-x: auto;
     margin: 1rem 0;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Tables */
+/* Simple Table – with full borders */
 .simple-table {
     width: 100%;
-    min-width: 600px; /* Minimum width before scrolling */
+    min-width: 600px;
     border-collapse: collapse;
+    background: var(--card-bg);
 }
 
-.simple-table th, 
+.simple-table th,
 .simple-table td {
     padding: 0.75rem;
+    border: 2px solid #2e3b2a;
     text-align: left;
-    border-bottom: 1px solid var(--border);
+    vertical-align: top;
 }
 
 .simple-table th {
     font-weight: 700;
-    color: var(--accent);
-    background: rgba(0,0,0,0.1);
+    background: #2e3b2a;      /* moss green */
+    color: white;                   /* white text */
+    border-color: #2e3b2a;
 }
 
 .simple-table tr:last-child td {
-    border-bottom: none;
+    border-bottom: 2px solid #2e3b2a;  /* keep consistency, no removal */
 }
-
-
-.doc-section-gap {
-    margin-bottom: 3rem;
-}
-
-.doc-section-gap h2 {
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
 
 .inline-list {
     margin: 1em 2em 1em;
+}
+
+/* ===== Table of Contents Styles ===== */
+.toc-container {
+    --toc-width: 260px;
+    --toc-bg: var(--card-bg);
+    --toc-border: var(--border);
+    --toc-radius: var(--radius);
+    --toc-active: var(--accent);
+}
+
+/* Base styles */
+.toc-container {
+    background: var(--toc-bg);
+    border: 1px solid var(--toc-border);
+    border-radius: var(--toc-radius);
+    padding: 1rem;
+    font-size: var(--text-sm);
+    z-index: 1000;
+}
+
+.toc-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--accent);
+}
+
+.toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-list li {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.toc-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: block;
+    padding: 0.2rem 0;
+    transition: all 0.2s;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.toc-list a:hover {
+    color: var(--text);
+    text-decoration: none;
+    opacity: 1;
+}
+
+.toc-list a.active {
+    color: var(--accent-secondary);
+    border-left: 2px solid var(--accent-secondary);
+    padding-left: 0.5rem;
+}
+
+/* ===== TABLET (768px – 1023px) – sticky, non‑overlapping ===== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .toc-container {
+        position: sticky;
+        float: right;
+        clear: right;
+        width: var(--toc-width);
+        margin: 0 0 1rem 1.5rem;
+        top: 2.5rem;        /* starts below breadcrumb */
+        max-height: calc(100vh - 3rem);
+        overflow-y: auto;
+    }
+
+    /* Ensure content floats around the ToC */
+    .content, .doc-section, .function-doc, .type-doc {
+        overflow: hidden;
+    }
+}
+
+/* ===== DESKTOP (≥1024px) – fixed to right edge, hovers over margins ===== */
+@media (min-width: 1024px) {
+    .toc-container {
+        position: fixed;
+        width: var(--toc-width);
+        right: 1rem;
+        /* top will be set dynamically by JS (starts below breadcrumb, sticks on scroll) */
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+        transition: top 0.1s ease-out;
+    }
+}
+
+/* ===== Mobile (≤767px) – normal flow, above top breadcrumb ===== */
+@media (max-width: 767px) {
+    .toc-container {
+        position: relative;
+        width: 100%;
+        margin-bottom: var(--gap);
+    }
+
+    .toc-list {
+        display: block;
+        white-space: normal;
+    }
+
+    .toc-list li {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    .toc-list a {
+        display: block;
+        padding: 0.25rem 0;
+        white-space: normal;
+    }
+
+    .toc-list a.active {
+        background: transparent;
+        color: var(--accent-secondary);
+        border-left: 2px solid var(--accent-secondary);
+        padding-left: 0.5rem;
+    }
 }
